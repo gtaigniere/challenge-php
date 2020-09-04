@@ -32,6 +32,23 @@ class Fibonacci
      */
     public function calculer(int $n): int
     {
-        return 0;
+        if ($n < 0) {
+            throw new InvalidArgumentException(self::MSG_NOMBRE_NEGATIF);
+        }
+        if ($n == 0) {
+            return self::FIBONACCI_0;
+        }
+        if ($n == 1) {
+            return self::FIBONACCI_1;
+        }
+        $result = 0;
+        $nbMoins1 = self::FIBONACCI_1;
+        $nbMoins2 = self::FIBONACCI_0;
+        for ($i = 2; $i <= $n; $i++) {
+            $result = $nbMoins2 + $nbMoins1;
+            $nbMoins2 = $nbMoins1;
+            $nbMoins1 = $result;
+        }
+        return $result;
     }
 }

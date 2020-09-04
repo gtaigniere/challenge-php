@@ -46,6 +46,26 @@ class TriangleGenerator
      */
     public function generate(int $taille): string
     {
-        return '';
+        $result = '';
+        if ($taille < 0) {
+            throw new InvalidArgumentException(self::MSG_NB_NEGATIF);
+        } elseif (!empty($taille)) {
+            $basDuTriangle = str_repeat(self::STAR, $taille);
+            $nbCharByLine = strlen($basDuTriangle);
+            for ($i = 1; $i <= $nbCharByLine / 2; $i++) {
+                if ($i == 1) {
+//                    $result .= str_repeat(self::SPACE, $nbCharByLine / 2 - $i) .
+//                        self::STAR .
+//                        str_repeat(self::SPACE, $nbCharByLine / 2 - $i);
+                    $result .= str_pad(self::STAR, $nbCharByLine, " ", STR_PAD_BOTH);
+                } else {
+//                    $result .= self::LINE_JUMP . str_repeat(self::SPACE, $nbCharByLine / 2 - $i) .
+//                        str_repeat(self::STAR, $i) .
+//                        str_repeat(self::SPACE, $nbCharByLine / 2 - $i);
+                    $result .= self::LINE_JUMP . str_pad(str_repeat(self::STAR, $i), $nbCharByLine, " ", STR_PAD_BOTH);
+                }
+            }
+        }
+        return $result;
     }
 }

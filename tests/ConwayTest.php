@@ -2,6 +2,7 @@
 
 namespace Ex6;
 
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 class ConwayTest extends TestCase
@@ -38,7 +39,8 @@ class ConwayTest extends TestCase
      */
     public function testShouldReturnVoidWhenVoidGiven()
     {
-        $this->assertEquals('', $this->conway->draw(1, ''));
+        $this->expectException(InvalidArgumentException::class);
+        $this->conway->draw(1, '');
     }
 
     /**
