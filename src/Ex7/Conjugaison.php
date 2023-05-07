@@ -12,7 +12,7 @@ use InvalidArgumentException;
  * Contrainte:
  * La chaîne passée en argument ne doit pas dépasser 15 caractères ni contenir d'espaces.
  * Vérifiez que la chaîne passée en argument se termine bien par "er".
- * Si le verbe n'est pas du 3ème groupe vous devez lancer une exception du type InvalidArgumentException
+ * Si le verbe n'est pas du 1er groupe vous devez lancer une exception du type InvalidArgumentException
  * exemple :
  * Entrée : programmer
  * Sortie :
@@ -37,6 +37,20 @@ class Conjugaison
      */
     public function conjuguer(string $verbe): string
     {
-        return '';
+        $result = '';
+        $partVerb = substr($verbe, 0, (strlen($verbe) - 2));
+        if (preg_match('#er$#', $verbe)) {
+            $result .=
+                'je ' . $partVerb . 'e' . PHP_EOL .
+                'tu ' . $partVerb . 'es' . PHP_EOL .
+                'il ' . $partVerb . 'e' . PHP_EOL;
+            $result .= (preg_match('#ger$#', $verbe)) ? ('nous ' . $partVerb . 'eons' . PHP_EOL) : ('nous ' . $partVerb . 'ons' . PHP_EOL);
+            $result .=
+                'vous ' . $partVerb . 'ez' . PHP_EOL .
+                'ils ' . $partVerb . 'ent';
+        } else {
+            throw new InvalidArgumentException(self::MSG_VERBE_NON_1ER_GROUPE);
+        }
+        return $result;
     }
 }

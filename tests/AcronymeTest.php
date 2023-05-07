@@ -40,4 +40,12 @@ class AcronymeTest extends TestCase
     {
         $this->assertEquals('UCC', $this->acronyme->generate('Une chaîne 2 caractère !'));
     }
+
+    /**
+     * Si value vaut 'Une chaîne 2 carac-tère !' alors generate renvoie 'UCC'
+     */
+    public function testUneChaine2CaracTirettereRenvoieUCC()
+    {
+        $this->assertEquals('UCC', $this->acronyme->generate('Une chaîne 2 carac-tère !'));
+    }
 }

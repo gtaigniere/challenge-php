@@ -26,6 +26,26 @@ class FizzBuzz
      */
     public function range(int $min, int $max): string
     {
-        return '';
+    $result = '';
+        if ($min <= $max) {
+            for ($i = $min; $i <= $max; $i++) {
+                switch($i) {
+                    case($i % 15 == 0):
+                        $result .= 'FizzBuzz';
+                        break;
+                    case($i % 5 == 0):
+                        $result .= 'Buzz';
+                        break;
+                    case($i % 3 == 0):
+                        $result .= 'Fizz';
+                        break;
+                    default:
+                        $result .= $i;
+                }
+            }
+            return $result;
+        } else {
+            throw new InvalidArgumentException(self::MSG_INTERVAL_INVALIDE);
+        }
     }
 }

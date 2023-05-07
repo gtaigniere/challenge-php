@@ -32,6 +32,14 @@ class SyracuseGenerator
      */
     public function generate(int $val): string
     {
-        return '';
+        $result = $val;
+        if ($val <= 0) {
+            throw new InvalidArgumentException(self::ERREUR_NOMBRE_NEGATIF_OU_NULL);
+        }
+        while($val != 1) {
+            $val = ($val % 2 == 0) ? $val / 2 : $val * 3 + 1;
+            $result .= self::SEPARATOR . $val;
+        }
+        return $result;
     }
 }

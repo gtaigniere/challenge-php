@@ -13,6 +13,15 @@ class AcronymeGenerator
 {
     public function generate(string $value): string
     {
-        return '';
+        $chaine = '';
+        if (!empty($value)) {
+            $mots = explode(" ", $value);
+            foreach ($mots as $mot) {
+                if (preg_match('#[a-zA-Zéèêëàâïîôöùûü\-]+#', $mot)) {
+                    $chaine .= strtoupper($mot[0]);
+                }
+            }
+        }
+        return $chaine;
     }
 }
